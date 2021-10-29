@@ -27,6 +27,11 @@ def save_picture(form_picture):
 
 def send_reset_email(user):
     token = user.get_reset_token()
+
+    msg = Message()
+    msg.subject = 'Flask App Password Reset'
+    msg.sender = os.getenv('MAIL_USERNAME')
+    msg.recipients = [user.email]
     msg = Message('Password Reset Request',
                   sender='noreply@demo.com',
                   recipients=[user.email])
